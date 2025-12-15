@@ -1,1 +1,225 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>크리스마스 이브, 수정과 잔치</title>
+    <style>
+        /* [스타일] 포스터의 '우주/밤' 분위기를 살린 다크 모드 디자인 */
+        :root {
+            --bg-dark: #1a1a2e;
+            --accent-purple: #a56cc1; /* 포스터의 보라색 */
+            --accent-yellow: #fcd34d; /* 붕어빵 색 */
+            --text-white: #ffffff;
+            --neon-glow: 0 0 10px rgba(165, 108, 193, 0.7);
+        }
+
+        body {
+            font-family: 'Pretendard', 'Malgun Gothic', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-white);
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        /* 1. 헤더 (타이틀) */
+        header {
+            background: linear-gradient(180deg, #0f0c29, #302b63);
+            padding: 40px 20px;
+            border-bottom: 2px solid var(--accent-purple);
+        }
+        header h1 {
+            font-size: 2.5rem;
+            margin: 0;
+            text-shadow: var(--neon-glow);
+            color: #fff;
+        }
+        header p {
+            color: #ddd;
+            margin-top: 10px;
+            font-size: 1.1rem;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* 2. 부스 리스트 (카드 형태) */
+        .booth-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* 2열 배치 */
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+       
+        .booth-card {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--accent-purple);
+            border-radius: 15px;
+            padding: 15px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .booth-card:hover {
+            background: var(--accent-purple);
+            transform: scale(1.05);
+        }
+        .booth-title { font-weight: bold; font-size: 1.1rem; margin-bottom: 5px; }
+        .booth-loc { font-size: 0.8rem; color: #ccc; }
+
+        /* 3. 미션 섹션 (알타이르 예시) */
+        #mission-section {
+            background-color: #252540;
+            border-radius: 20px;
+            padding: 30px;
+            border: 2px dashed var(--accent-yellow);
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+
+        h2 { color: var(--accent-yellow); }
+
+        /* 퀴즈/비밀번호 입력창 */
+        input[type="text"] {
+            width: 70%;
+            padding: 12px;
+            border-radius: 8px;
+            border: none;
+            margin-top: 15px;
+            font-size: 1rem;
+            text-align: center;
+        }
+
+        button.submit-btn {
+            background-color: var(--accent-purple);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            margin-top: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+        button.submit-btn:hover { background-color: #8e44ad; }
+
+        /* 4. 숨겨진 결과 화면 (처음엔 안 보임) */
+        .hidden-result {
+            display: none; /* 핵심: 숨김 */
+            margin-top: 30px;
+            background-color: rgba(0, 255, 127, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            border: 2px solid #00ff7f;
+            animation: slideDown 0.5s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .science-tip {
+            background-color: #fff;
+            color: #333;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            text-align: left;
+            font-size: 0.9rem;
+        }
+        .keyword { color: red; font-weight: bold; }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>🎄 수정과 잔치</h1>
+        <p>2025.12.24 (수) 6, 7교시 | 수학·정보·과학</p>
+    </header>
+
+    <div class="container">
+       
+        <h3>📍 부스 탐색하기</h3>
+        <div class="booth-grid">
+            <div class="booth-card" onclick="alert('물리실로 오세요!')">
+                <div class="booth-title">🦾 전자두뇌</div>
+                <div class="booth-loc">물리실</div>
+            </div>
+            <div class="booth-card" onclick="alert('화학실에서 레이싱 한판?')">
+                <div class="booth-title">🏎️ 코드보드</div>
+                <div class="booth-loc">화학실</div>
+            </div>
+            <div class="booth-card" onclick="alert('생명과학실로 오세요!')">
+                <div class="booth-title">🐟 아이디오</div>
+                <div class="booth-loc">생명과학실</div>
+            </div>
+            <div class="booth-card" onclick="alert('스트레스 풀러 생명과학실로!')">
+                <div class="booth-title">🧬 생사기로</div>
+                <div class="booth-loc">생명과학실</div>
+            </div>
+        </div>
+
+        <section id="mission-section">
+            <h2>🚀 알타이르: 탈출 미션</h2>
+            <p>
+                "소행성 충돌까지 남은 시간 5분!"<br>
+                지구과학실 곳곳에 숨겨진 단서를 조합해<br>
+                <strong>'노아의 방주'</strong> 비밀번호를 입력하세요.
+            </p>
+
+            <div>
+                <input type="text" id="passwordInput" placeholder="비밀번호 입력 (힌트: 행성 이름)">
+                <br>
+                <button class="submit-btn" onclick="checkPassword()">탈출 시도!</button>
+            </div>
+
+            <div id="successBox" class="hidden-result">
+                <h1>🎉 탈출 성공!</h1>
+                <p>우주선 문이 열렸습니다. 탑승하세요!</p>
+               
+                <div class="science-tip">
+                    <h3>💡 숨겨진 과학 원리</h3>
+                    <p>
+                        소행성의 궤도를 계산하려면 <span class="keyword">케플러의 법칙</span>을 이해해야 합니다.
+                        행성은 태양을 초점으로 타원 궤도를 그리며 공전합니다.
+                        여러분이 찾은 단서는 바로 이 궤도의 좌표였습니다!
+                    </p>
+                </div>
+               
+                <p style="margin-top:15px; color:#fcd34d;">🎁 운영진에게 이 화면을 보여주고 간식을 받으세요!</p>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        function checkPassword() {
+            // 1. 사용자가 입력한 값 가져오기
+            const input = document.getElementById('passwordInput').value;
+           
+            // 2. 정답 체크 (여기서는 정답을 '지구'라고 설정함)
+            // 실제 운영할 땐 원하는 비밀번호로 바꾸세요!
+            if (input.trim() === "지구" || input.trim() === "earth") {
+               
+                // 3. 정답이면 숨겨진 박스 보여주기
+                const successBox = document.getElementById('successBox');
+                successBox.style.display = 'block';
+               
+                // 박스 쪽으로 스크롤 내리기
+                successBox.scrollIntoView({ behavior: 'smooth' });
+               
+                alert("비밀번호 확인... 문이 열립니다!");
+               
+            } else {
+                // 4. 오답일 때
+                alert("⛔ 비밀번호 오류! 단서를 다시 확인하세요.");
+            }
+        }
+    </script>
+</body>
+</html>
 
